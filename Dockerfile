@@ -1,6 +1,7 @@
 FROM docker:dind
 
-COPY ./ca.crt /usr/local/share/ca-certificates/
+RUN mkdir -p /etc/docker/certs.d/harbor.alie.javeriana.edu.co
+COPY ./ca.crt /etc/docker/certs.d/harbor.alie.javeriana.edu.co/ca.crt
 
 RUN update-ca-certificates
 
