@@ -1,0 +1,7 @@
+services:
+  docker_dind:
+    image: juancsucoder/docker_dind:latest
+    build:
+      contextPath: .
+      dockerfile: Dockerfile
+
