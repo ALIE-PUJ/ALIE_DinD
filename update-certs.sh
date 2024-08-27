@@ -5,32 +5,32 @@ if [ "$(id -u)" -ne 0 ]; then
         exit 1
 fi
 
-echo " >> Copying new certificate..."
+echo " >> $(hostname) >> Copying new certificate..."
 cp ca.crt /usr/local/share/ca-certificates
-echo " >> Copied successfully!"
+echo " >> $(hostname) >> Copied successfully!"
 
-echo " >> Updating CA Certs..."
+echo " >> $(hostname) >> Updating CA Certs..."
 update-ca-certificates
-echo " >> Updated!"
+echo " >> $(hostname) >> Updated!"
 
-echo " >> Restarting services..."
+echo " >> $(hostname) >> Restarting services..."
 systemctl restart docker
 systemctl restart containerd
 systemctl restart k3s
 systemctl restart k3s-agent
 systemctl restart containerd
-echo " >> All services restarted"
-echo " >> Done!"
+echo " >> $(hostname) >> All services restarted"
+echo " >> $(hostname) >> Done!"
 
-echo " >> Updating remote nodes..."
-echo " >> Copying information to remote hosts..."
+echo " >> $(hostname) >> Updating remote nodes..."
+echo " >> $(hostname) >> Copying information to remote hosts..."
 ./copy-certs.sh
-echo " >> Information copied!"
+echo " >> $(hostname) >> Information copied!"
 
-echo " >> Running update on remote hosts"
-sshpass -p 'sistemas' ssh sistemas@kworker3.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh' 
-sshpass -p 'sistemas' ssh sistemas@kworker4.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh'
+echo " >> $(hostname) >> Running update on remote hosts"
+sshpass -p 'sistemas' ssh sistemas@kworker3.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh' &
+sshpass -p 'sistemas' ssh sistemas@kworker4.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh' &
 sshpass -p 'sistemas' ssh sistemas@kworker5.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh'
-echo " >> Update finished on remote hosts!"
+echo " >> $(hostname) >> Update finished on remote hosts!"
 
 
