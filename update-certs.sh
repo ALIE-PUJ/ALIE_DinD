@@ -22,3 +22,15 @@ systemctl restart containerd
 echo "All services restarted"
 echo "Done!"
 
+echo "Updating remote nodes..."
+echo "Copying information to remote hosts..."
+./copy-certs.sh
+echo "Information copied!"
+
+echo "Running update on remote hosts"
+ssh sistemas@kworker3.local 'sudo update-certs.sh'
+ssh sistemas@kworker4.local 'sudo update-certs.sh'
+ssh sistemas@kworker5.local 'sudo update-certs.sh'
+echo "Update finished on remote hosts!"
+
+
