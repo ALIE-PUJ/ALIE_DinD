@@ -28,8 +28,8 @@ echo " >> $(hostname) >> Copying information to remote hosts..."
 echo " >> $(hostname) >> Information copied!"
 
 echo " >> $(hostname) >> Running update on remote hosts"
-sshpass -p 'sistemas' ssh sistemas@kworker3.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh' &
-sshpass -p 'sistemas' ssh sistemas@kworker4.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh' &
+sshpass -p 'sistemas' ssh sistemas@kworker3.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh'
+sshpass -p 'sistemas' ssh sistemas@kworker4.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh'
 sshpass -p 'sistemas' ssh sistemas@kworker5.local 'echo sistemas | sudo -S /home/sistemas/update-certs.sh'
 echo " >> $(hostname) >> Update finished on remote hosts!"
 
